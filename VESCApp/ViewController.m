@@ -14,7 +14,7 @@ typedef struct {
     float current_in;
     float rpm;
     float watt_hours;
-    float tachometer_abs;
+    uint8_t tachometer_abs[4];
 } packet;
 
 @interface ViewController ()
@@ -114,9 +114,14 @@ typedef struct {
         [self performSelector:@selector(stopSearchReader) withObject:nil afterDelay:2];
     }
 }
-
+int32_t buffer_get_int32(const uint8_t *buffer) {
+    int32_t res = ((uint32_t) buffer[0]) << 24 | ((uint32_t) buffer[1]) << 16 | ((uint32_t) buffer[2]) << 8 | ((uint32_t) buffer[3]);
+    return res;
+}
 #pragma mark - CustomFunctions
 -(void)presentData:(packet)dataVesc {
+    int tachometer_abs = buffer_get_int32(dataVesc.tachometer_abs);
+    
     double wheelDiameter = 700; //mm diameter
     double motorDiameter = 63; //mm diameter
     double gearRatio = motorDiameter / wheelDiameter;
@@ -126,7 +131,7 @@ typedef struct {
     double ratioPulseDistance = (gearRatio * wheelDiameter * M_PI) / ((motorPoles * 3) * 1000000); // Pulses to km travelled
     
     double speed = dataVesc.rpm * ratioRpmSpeed;
-    double distance = dataVesc.tachometer_abs * ratioPulseDistance;
+    double distance = tachometer_abs * ratioPulseDistance;
     double power = dataVesc.current_in * dataVesc.v_in;
     
     arrPedalessData = @[@{@"title":@"Current Batt",@"data":[NSString stringWithFormat:@"%.2f A",dataVesc.current_in]},
