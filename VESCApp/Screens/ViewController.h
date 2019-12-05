@@ -17,6 +17,7 @@
     
     NSArray *arrPedalessData;
     IBOutlet UICollectionView *colPedalessData;
+    IBOutlet UIButton *btnConnect;
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DataCell.h"
+#import "Helpers.h"
 
 typedef struct {
     float v_in;
@@ -93,25 +94,20 @@ typedef struct {
 }
 
 #pragma mark - IBActions
--(IBAction)onBtnRead:(UIButton *)sender{
+-(IBAction)onBtnConnect:(UIButton *)sender{
     if (connectedPeripheral != nil) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure ?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alert addAction:[UIAlertAction actionWithTitle:@"Dissconnect" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+        [Helpers showPopup:self title:@"Are you sure ?" buttonName:@"Dissconnect" cancelName:@"Cancel" ok:^{
             [self->centralManager cancelPeripheralConnection:self->connectedPeripheral];
             self->connectedPeripheral = nil;
             [self->peripherals removeAllObjects];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
+            [sender setTitle:@"Connect" forState:UIControlStateNormal];
+        } cancel:nil];
     }
     else{
         [peripherals removeAllObjects];
         [centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:@"FFE0"]] options:nil];
         [self performSelector:@selector(stopSearchReader) withObject:nil afterDelay:2];
+        [sender setTitle:@"Disconnect" forState:UIControlStateNormal];
     }
 }
 int32_t buffer_get_int32(const uint8_t *buffer) {
@@ -154,10 +150,10 @@ int32_t buffer_get_int32(const uint8_t *buffer) {
     }
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Re-scan pedaless" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self onBtnRead:nil];
+        [self onBtnConnect:self->btnConnect];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
+        [self->btnConnect setTitle:@"Connect" forState:UIControlStateNormal];
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -184,11 +180,8 @@ int32_t buffer_get_int32(const uint8_t *buffer) {
 #pragma mark - UIViewDelegates
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
     centralManager = [CBCentralManager.alloc initWithDelegate:self queue:nil];
     peripherals = NSMutableArray.new;
-    
-    [self performSelector:@selector(onBtnRead:) withObject:nil afterDelay:1];
 }
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

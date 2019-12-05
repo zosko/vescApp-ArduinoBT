@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D36E47923993AD3009001F9 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D36E47823993AD3009001F9 /* Helpers.m */; };
 		6D37FEF5232139F800710E2D /* DataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D37FEF4232139F800710E2D /* DataCell.m */; };
 		6D434D7B20888D3D00188680 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D434D7A20888D3D00188680 /* AppDelegate.m */; };
 		6D434D7E20888D3D00188680 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D434D7D20888D3D00188680 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D36E47723993AD3009001F9 /* Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		6D36E47823993AD3009001F9 /* Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		6D37FEF3232139F800710E2D /* DataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataCell.h; sourceTree = "<group>"; };
 		6D37FEF4232139F800710E2D /* DataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataCell.m; sourceTree = "<group>"; };
 		6D434D7620888D3D00188680 /* Pedaless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pedaless.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +45,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D36E47423993A83009001F9 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				6D36E47623993AC6009001F9 /* Helpers */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		6D36E47523993A9C009001F9 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				6D37FEF2232139DB00710E2D /* DataCell */,
+				6D434D7C20888D3D00188680 /* ViewController.h */,
+				6D434D7D20888D3D00188680 /* ViewController.m */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		6D36E47623993AC6009001F9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6D36E47723993AD3009001F9 /* Helpers.h */,
+				6D36E47823993AD3009001F9 /* Helpers.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6D37FEF2232139DB00710E2D /* DataCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -70,11 +100,10 @@
 		6D434D7820888D3D00188680 /* VESCApp */ = {
 			isa = PBXGroup;
 			children = (
-				6D37FEF2232139DB00710E2D /* DataCell */,
+				6D36E47423993A83009001F9 /* Framework */,
+				6D36E47523993A9C009001F9 /* Screens */,
 				6D434D7920888D3D00188680 /* AppDelegate.h */,
 				6D434D7A20888D3D00188680 /* AppDelegate.m */,
-				6D434D7C20888D3D00188680 /* ViewController.h */,
-				6D434D7D20888D3D00188680 /* ViewController.m */,
 				6D434D7F20888D3D00188680 /* Main.storyboard */,
 				6D434D8220888D3F00188680 /* Assets.xcassets */,
 				6D434D8420888D3F00188680 /* LaunchScreen.storyboard */,
@@ -156,6 +185,7 @@
 			files = (
 				6D434D7E20888D3D00188680 /* ViewController.m in Sources */,
 				6D37FEF5232139F800710E2D /* DataCell.m in Sources */,
+				6D36E47923993AD3009001F9 /* Helpers.m in Sources */,
 				6D434D8920888D3F00188680 /* main.m in Sources */,
 				6D434D7B20888D3D00188680 /* AppDelegate.m in Sources */,
 			);
